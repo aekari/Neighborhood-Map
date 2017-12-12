@@ -1,8 +1,8 @@
 var Locations = [{
         name: "BAM Harvey Theater",
         position: {
-            lat: 40.688519,
-            lng: -73.979055
+            lat: 40.6884270,
+            lng:  -73.9787920
         },
         id: "49b6a827f964a5200e531fe3"
     },
