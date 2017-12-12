@@ -1,44 +1,41 @@
-var Locations = [{
-        name: "BAM Harvey Theater",
-        position: {
+var initialLocations = [{
+            name: "BAM Harvey Theater",
+            //      position: {
             lat: 40.6884270,
-            lng:  -73.9787920
+            lng: -73.9787920
         },
-        id: "49b6a827f964a5200e531fe3"
+        //id: "49b6a827f964a5200e531fe3"
     },
     {
         name: "BRIC House",
-        position: {
+        //        position: {
 
-            lat: 40.688870,
-            lng: -73.979151
-        },
-        id: "4a81c28df964a5207af71fe3"
+        lat: 40.688870,
+        lng: -73.979151
     },
-    {
-        name: "Atlantic Terminal",
-        position: {
-            lat: 40.685096,
-            lng: -73.977691
-        },
-        id: "43fa07c9f964a520d92f1fe3"
-    },
-    {
-        name: "Beacon\'s Closet Park Slope",
-        position: {
-            lat: 40.680306,
-            lng: -73.978097
-        },
-        id: "4a5e13d1f964a520ffbd1fe3"
-    },
-    {
-        name: 'Barclays Center',
-        position: {
-            lat: 40.682682,
-            lng: -73.975035
-        },
-        id: "4b992b04f964a520726635e3"
-    }
+    //id: "4a81c28df964a5207af71fe3"
+}, {
+    name: "Atlantic Terminal",
+    //       position: {
+    lat: 40.685096,
+    lng: -73.977691
+},
+//id: "43fa07c9f964a520d92f1fe3"
+}, {
+    name: "Beacon\'s Closet Park Slope",
+    //        position: {
+    lat: 40.680306,
+    lng: -73.978097
+},
+//id: "4a5e13d1f964a520ffbd1fe3"
+}, {
+    name: 'Barclays Center',
+    //       position: {
+    lat: 40.682682,
+    lng: -73.975035
+},
+//id: "4b992b04f964a520726635e3"
+}
 ];
 
 
@@ -56,8 +53,21 @@ var Location = function (data) {
     this.city = "";
 
     this.visible = ko.observable(true);
-//The '&V=..." is used for version control. It is a YYYYMMDD format.
-    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20180607' + '&query=' + this.name;
+
+
+
+
+    //Infowindow for street/city info
+    this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
+        '<div class="content">' + self.street + "</div>" +
+        '<div class="content">' + self.city + "</div>";
+
+
+    this.infoWindow = new google.maps.InfoWindow({
+        content: self.contentString
+    });
+    //The '&V=..." is used for version control. It is a YYYYMMDD format.
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20170607' + '&query=' + this.name;
 
     $.getJSON(foursquareURL).done(function (data) {
         var results = data.response.venues[0];
@@ -66,7 +76,7 @@ var Location = function (data) {
         self.city = results.location.formattedAddress[1];
 
     }).fail(function () {
-        alert("There was an error with the Foursquare API call. Please refresh the page and try again later.");
+        alert("There was an error with the Foursquare API call. Please refresh the page and try again.");
     });
 
     // Infowindow containing the street and city info.

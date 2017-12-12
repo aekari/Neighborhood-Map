@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ashleigh's Neighborhood Map</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
     <div class="search-box">
-        <input class="search-input" id="search-input" placeholder="Search Locations" data-bind="textInput: query, valueUpdate: 'keyup'">
+        <input class="search-input" id="search-input" placeholder="Search Locations" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
     </div>
-<!-- main area of the page-->
-    <div class="main">
-       <!-- pre-made list of locations -->
-        <section class="pinned-places">
+    <!-- main area of the page-->
+    <!-- <div class="main"> -->
+        <!-- list of locations -->
+        <div class="pinned-places">
             <div class="location-list" id="location-list">
                 <ul class="returns" id="returns" data-bind="foreach: filteredList">
                     <li class="point" id="point" data-bind="text: name, click: bounce"></li>
                 </ul>
             </div>
-        </section>
+        </div>
         <!-- Mapped area of the page-->
         <section class="map-area" id="mapped-area"></section>
 
-    </div>
+    <!-- </div> -->
 
-<!--JS scripts go towards the bottom of the body tag-->
-<script type="text/javascript" src='js/knockout-3.4.2.js'></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
-<script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlFgxHOD_ljz6caBM2T_kIoHXQy72NNU&callback=initMap" onerror="googleError()"></script>
-
+    <!--JS scripts go towards the bottom of the body tag-->
+    <script type="text/javascript" src='js/knockout-3.4.2.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='js/main.js'></script>
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHYZZxCfkrWdx-yJntMk8yem-PgUsP4M&callback=startApp&libraries=places" onerror="googleError()"></script>
 
 </body>
 
