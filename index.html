@@ -15,21 +15,21 @@
     <!-- <div class="main"> -->
         <!-- list of locations -->
         <div class="pinned-places">
-            <div class="location-list" id="location-list">
+            <div class="list" id="list">
                 <ul class="returns" id="returns" data-bind="foreach: filteredList">
                     <li class="point" id="point" data-bind="text: name, click: bounce"></li>
                 </ul>
             </div>
         </div>
         <!-- Mapped area of the page-->
-        <section class="map-area" id="mapped-area"></section>
+        <div class="map" id="map" style="position: relative; overflow: hidden;"></div>
 
     <!-- </div> -->
 
     <!--JS scripts go towards the bottom of the body tag-->
-    <script type="text/javascript" src='js/knockout-3.4.2.js'></script>
+    <script type="text/javascript" src="js/knockout-3.4.2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='js/main.js'></script>
+    <script src="js/main.js"></script>
     <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHYZZxCfkrWdx-yJntMk8yem-PgUsP4M&callback=startApp&libraries=places" onerror="googleError()"></script>
 
 </body>
