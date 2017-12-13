@@ -1,4 +1,4 @@
-var initialLocations = [{
+var myLocations = [{
         name: "BAM Harvey Theater",
         lat: 40.6884270,
         long: -73.9787920
@@ -26,12 +26,12 @@ var initialLocations = [{
 ];
 
 
-// Global variables for the strict mode
+// strict mode Global variables
 var map;
 var clientID;
 var clientSecret;
 
-var Location = function(data) {
+var Location = function (data) {
     var self = this;
     this.name = data.name;
     this.lat = data.lat;
@@ -41,7 +41,7 @@ var Location = function(data) {
 
     this.visible = ko.observable(true);
 
-    // Infowindow with street and city information
+    // Infowindow with location info
     this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
         '<div class="content">' + self.street + "</div>" +
         '<div class="content">' + self.city + "</div>";
@@ -51,17 +51,17 @@ var Location = function(data) {
         content: self.contentString
     });
 
-    //Authenticating foursquare api using the clientid and key that is provided with registration
-    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20140609 ' + '&query=' + this.name;
+    // Foursquare api Authenticatification using the clientid I registered with.
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20000607 ' + '&query=' + this.name;
 
-    $.getJSON(foursquareURL).done(function(data) {
+    $.getJSON(foursquareURL).done(function (data) {
         var results = data.response.venues[0];
 
         self.street = results.location.formattedAddress[0];
         self.city = results.location.formattedAddress[1];
 
-    }).fail(function() {
-        alert("There was an error with the Foursquare API call. Please refresh the page and try again.");
+    }).fail(function () {
+        alert("There was an error with the Foursquare API call. Please refresh the page.");
     });
     // Infowindow with street and city information
     this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
@@ -78,7 +78,7 @@ var Location = function(data) {
         title: data.name
     });
 
-    this.showMarker = ko.computed(function() {
+    this.showMarker = ko.computed(function () {
         if (this.visible() === true) {
             this.marker.setMap(map);
         } else {
@@ -87,7 +87,7 @@ var Location = function(data) {
         return true;
     }, this);
 
-    this.marker.addListener('click', function() {
+    this.marker.addListener('click', function () {
         self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
             '<div class="content">' + self.street + "</div>" +
             '<div class="content">' + self.city + "</div>";
@@ -99,12 +99,12 @@ var Location = function(data) {
 
         // this gives the bouncing affect of the pointer on the map. 
         self.marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
+        setTimeout(function () {
             self.marker.setAnimation(null);
         }, 2100);
     });
 
-    this.bounce = function(place) {
+    this.bounce = function (place) {
         google.maps.event.trigger(self.marker, 'click');
     };
 };
@@ -124,23 +124,23 @@ function AppViewModel() {
         }
     });
 
-    // foursquare api settings used to access the page. 
+    // unique foursquare api keys 
     clientID = "LHIMRI5U4GYF23SHGQKRN2FPLXDNV20K0S0PWZNW12ZVCD3S";
     clientSecret = "K35I1X0SHF5KTNLVDS5MY1SRKCTGUON23N2EQUIYEZDR31ZQ";
 
-    initialLocations.forEach(function(locationItem) {
+    myLocations.forEach(function (locationItem) {
         self.locationList.push(new Location(locationItem));
     });
-    // Filtering for search list 
-    this.filteredList = ko.computed(function() {
+    // search list filter
+    this.filteredList = ko.computed(function () {
         var filter = self.searchTerm().toLowerCase();
         if (!filter) {
-            self.locationList().forEach(function(locationItem) {
+            self.locationList().forEach(function (locationItem) {
                 locationItem.visible(true);
             });
             return self.locationList();
         } else {
-            return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+            return ko.utils.arrayFilter(self.locationList(), function (locationItem) {
                 var string = locationItem.name.toLowerCase();
                 var result = (string.search(filter) >= 0);
                 locationItem.visible(result);
@@ -156,7 +156,7 @@ function AppViewModel() {
 function startApp() {
     ko.applyBindings(new AppViewModel());
 }
-// This will alert the user if there is an error loading the map
+// this function will run in an effort to alert the user if there's an error loading my map
 function errorHandling() {
-    alert("Google Maps failed to load the requested page. Please refresh the page or try again later.");
+    alert("Google Maps failed to load the requested page. Please refresh the page.");
 }
