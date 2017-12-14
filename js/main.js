@@ -42,9 +42,9 @@ var Location = function (data) {
     this.visible = ko.observable(true);
 
     // Infowindow with location info
-    this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
-        '<div class="content">' + self.street + "</div>" +
-        '<div class="content">' + self.city + "</div>";
+    //    this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
+    //        '<div class="content">' + self.street + "</div>" +
+    //        '<div class="content">' + self.city + "</div>";
 
 
     this.infoWindow = new google.maps.InfoWindow({
@@ -157,6 +157,6 @@ function startApp() {
     ko.applyBindings(new AppViewModel());
 }
 // this function will run in an effort to alert the user if there's an error loading my map
-function errorHandling() {
+function googleError() {
     alert("Google Maps failed to load the requested page. Please refresh the page.");
 }
