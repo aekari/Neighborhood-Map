@@ -52,7 +52,7 @@ var Location = function (data) {
     });
 
     // Foursquare api Authenticatification using the clientid I registered with.
-    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20000607 ' + '&query=' + this.name;
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.lat + ',' + this.long + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20171214 ' + '&query=' + this.name;
 
     $.getJSON(foursquareURL).done(function (data) {
         var results = data.response.venues[0];
