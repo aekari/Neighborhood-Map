@@ -8,6 +8,8 @@ This is a map of a neighborhood in Brooklyn, NY featuring interesting places to 
 
 Download or clone the repo onto your local machine, unzip the file (if zipped) and open the index.html file in your browser by double clicking on it.
 
+![](https://i.imgur.com/3C6Etw4.png)
+
 ##### Resources
 
 - [Google Maps Javascript API](https://developers.google.com/maps/documentation/). I added a full-sized map using Google Maps API key and [Foursquare Developer Tools](https://developer.foursquare.com/).
