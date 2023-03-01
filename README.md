@@ -2,7 +2,7 @@
 
 ### Project Overview
 
-This is a map of a neighborhood in Brooklyn, NY featuring interesting places to visit. You can view it live [here](https://aekari.github.io/neighborhood-map/). It features the use of Knockout JS, Google Maps API, and the FourSquare API.
+This is a map of a neighborhood in Brooklyn, NY featuring interesting places to visit. You can view it live [here](https://aekari.github.io/Neighborhood-Map/). It features the use of Knockout JS, Google Maps API, and the FourSquare API.
 
 ### To Access the Files
 
